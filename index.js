@@ -34,11 +34,6 @@ async function init() {
         drm: {
             servers: {
                 'com.apple.fps.1_0': 'https://video.bunnycdn.com/FairPlayLicense/210728/de612f89-4ea4-48d2-a3d9-7b0c8a549c31'
-            },
-            advanced: {
-                'com.apple.fps.1_0': {
-                    serverCertificate: await fetchCertificate()
-                }
             }
         }
     });
@@ -64,16 +59,6 @@ async function init() {
 
     // Listen to error events
     player.addEventListener('error', onError);
-}
-
-async function fetchCertificate() {
-    try {
-        const response = await fetch('https://video.bunnycdn.com/FairPlay/210728/certificate');
-        return new Uint8Array(await response.arrayBuffer());
-    } catch (error) {
-        console.error('Error fetching certificate:', error);
-        throw error;
-    }
 }
 
 function onError(event) {
